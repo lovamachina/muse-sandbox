@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOVA Studio — Creative Agency</title>
+<meta name="description" content="NOVA Studio is an independent creative agency crafting brands, websites and campaigns with character." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0b0b10;
+    --bg-soft: #121218;
+    --ink: #f4f2ec;
+    --muted: #a7a7b3;
+    --lime: #d7ff3e;
+    --violet: #8b7bff;
+    --line: rgba(244, 242, 236, 0.12);
+    --radius: 18px;
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--lime); color: #0b0b10; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem clamp(1.25rem, 4vw, 3rem);
+    background: rgba(11, 11, 16, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.04em; text-decoration: none; color: var(--ink); }
+  .logo span { color: var(--lime); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .btn {
+    display: inline-block; font-family: var(--font-display); font-weight: 600;
+    text-decoration: none; border-radius: 999px; cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary { background: var(--lime); color: #0b0b10; padding: 0.7rem 1.5rem; font-size: 0.95rem; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(215, 255, 62, 0.35); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink); padding: 0.9rem 2rem; }
+  .btn-ghost:hover { border-color: var(--lime); color: var(--lime); }
+
+  /* Pure-CSS mobile menu (checkbox hack) */
+  #menu-toggle { display: none; }
+  .burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 6px; }
+  .burger span { display: block; width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: 0.3s; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem clamp(1.25rem, 4vw, 3rem) 4rem;
+    position: relative; overflow: hidden;
+  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(110px); opacity: 0.5; pointer-events: none; }
+  .blob-1 { width: 480px; height: 480px; background: #3d2bff; top: -120px; right: -80px; }
+  .blob-2 { width: 380px; height: 380px; background: #b8e02e; bottom: -140px; left: -100px; opacity: 0.28; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .eyebrow::before { content: ""; width: 34px; height: 1px; background: var(--lime); }
+  .hero h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.8rem, 8vw, 6.5rem); line-height: 1.02; letter-spacing: -0.02em;
+    max-width: 14ch;
+  }
+  .hero h1 em { font-style: normal; color: var(--lime); }
+  .hero p.lead { margin-top: 1.5rem; max-width: 52ch; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.2rem); }
+  .hero-cta { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+  .hero-meta { display: flex; gap: 2.5rem; margin-top: 3.5rem; flex-wrap: wrap; }
+  .hero-meta div strong { display: block; font-family: var(--font-display); font-size: 1.6rem; }
+  .hero-meta div span { color: var(--muted); font-size: 0.85rem; }
+
+  /* ---------- Marquee (pure CSS) ---------- */
+  .marquee { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 1.1rem 0; background: var(--bg-soft); }
+  .marquee-track { display: flex; gap: 3.5rem; width: max-content; animation: scroll 26s linear infinite; }
+  .marquee-track span { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.9rem; color: var(--muted); white-space: nowrap; }
+  .marquee-track span i { color: var(--lime); font-style: normal; margin-right: 3.5rem; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(4rem, 9vw, 7.5rem) clamp(1.25rem, 4vw, 3rem); max-width: 1200px; margin: 0 auto; }
+  .section-head { margin-bottom: 3rem; }
+  .section-head h2 { font-family: var(--font-display); font-size: clamp(1.9rem, 4.5vw, 3rem); letter-spacing: -0.01em; }
+  .section-head h2 em { font-style: normal; color: var(--lime); }
+  .section-head p { color: var(--muted); margin-top: 0.75rem; max-width: 56ch; }
+  .kicker { font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lime); margin-bottom: 0.9rem; display: block; }
+
+  /* Services */
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .card {
+    background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 2rem; transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .card:hover { transform: translateY(-6px); border-color: rgba(215, 255, 62, 0.45); }
+  .card .num { font-family: var(--font-display); color: var(--lime); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.18em; }
+  .card h3 { font-family: var(--font-display); font-size: 1.35rem; margin: 0.9rem 0 0.6rem; }
+  .card p { color: var(--muted); font-size: 0.96rem; }
+  .card ul { list-style: none; margin-top: 1.1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .card ul li { font-size: 0.78rem; border: 1px solid var(--line); border-radius: 999px; padding: 0.3rem 0.8rem; color: var(--muted); }
+
+  /* Work */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .work-card { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--bg-soft); transition: transform 0.25s ease; text-decoration: none; color: inherit; display: block; }
+  .work-card:hover { transform: translateY(-6px); }
+  .work-art { aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 2.2rem; letter-spacing: -0.02em; }
+  .wa-1 { background: linear-gradient(135deg, #ff5e62, #ff9966); }
+  .wa-2 { background: linear-gradient(135deg, #3d2bff, #8b7bff); }
+  .wa-3 { background: linear-gradient(135deg, #0ba360, #d7ff3e); color: #0b0b10; }
+  .wa-4 { background: linear-gradient(135deg, #232323, #5a5a72); }
+  .wa-5 { background: linear-gradient(135deg, #f857a6, #ff5858); }
+  .wa-6 { background: linear-gradient(135deg, #00c9ff, #92fe9d); color: #0b0b10; }
+  .work-body { padding: 1.25rem 1.4rem 1.5rem; }
+  .work-body h3 { font-family: var(--font-display); font-size: 1.1rem; }
+  .work-body span { color: var(--muted); font-size: 0.85rem; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; text-align: center; }
+  .stat { padding: 2rem 1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-soft); }
+  .stat strong { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--lime); display: block; }
+  .stat span { color: var(--muted); font-size: 0.88rem; }
+
+  /* Process */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; counter-reset: step; }
+  .step { position: relative; padding-top: 1rem; }
+  .step::before {
+    counter-increment: step; content: "0" counter(step);
+    font-family: var(--font-display); font-weight: 700; color: var(--lime); font-size: 0.9rem; letter-spacing: 0.15em;
+  }
+  .step h3 { font-family: var(--font-display); margin: 0.7rem 0 0.5rem; font-size: 1.15rem; }
+  .step p { color: var(--muted); font-size: 0.93rem; }
+  .step:not(:last-child)::after { content: ""; position: absolute; top: 2.2rem; right: -0.9rem; width: 1.4rem; height: 1px; background: var(--line); }
+
+  /* Testimonial */
+  .quote { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(2rem, 5vw, 3.5rem); text-align: center; }
+  .quote blockquote { font-family: var(--font-display); font-size: clamp(1.2rem, 2.8vw, 1.8rem); line-height: 1.45; max-width: 34ch; margin: 0 auto; }
+  .quote blockquote em { font-style: normal; color: var(--lime); }
+  .quote cite { display: block; margin-top: 1.5rem; color: var(--muted); font-style: normal; font-size: 0.9rem; }
+  .quote cite strong { color: var(--ink); }
+
+  /* CTA */
+  .cta { text-align: center; }
+  .cta h2 { font-family: var(--font-display); font-size: clamp(2.2rem, 6vw, 4.2rem); letter-spacing: -0.02em; line-height: 1.05; }
+  .cta h2 em { font-style: normal; color: var(--lime); }
+  .cta p { color: var(--muted); margin: 1.25rem auto 2.25rem; max-width: 46ch; }
+  .btn-large { padding: 1.1rem 2.6rem; font-size: 1.05rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem clamp(1.25rem, 4vw, 3rem); max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  footer p { color: var(--muted); font-size: 0.85rem; }
+  footer .social { display: flex; gap: 1.4rem; }
+  footer .social a { color: var(--muted); text-decoration: none; font-size: 0.85rem; }
+  footer .social a:hover { color: var(--lime); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .step:not(:last-child)::after { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 720px) {
+    .burger { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: rgba(11, 11, 16, 0.97);
+      border-bottom: 1px solid var(--line);
+      padding: 0.5rem 1.25rem 1.25rem;
+    }
+    .nav-links a { display: block; padding: 0.8rem 0; border-top: 1px solid var(--line); font-size: 1.05rem; }
+    #menu-toggle:checked ~ .nav-links { display: flex; }
+    #menu-toggle:checked ~ .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #menu-toggle:checked ~ .burger span:nth-child(2) { opacity: 0; }
+    #menu-toggle:checked ~ .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    nav .btn-primary { display: none; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top">NOVA<span>*</span></a>
+  <input type="checkbox" id="menu-toggle" />
+  <label class="burger" for="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></label>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="btn btn-primary" href="#contact">Start a project</a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <span class="eyebrow">Independent creative agency</span>
+  <h1>We make brands <em>impossible</em> to ignore.</h1>
+  <p class="lead">NOVA is a small team with big-agency output — brand identity, websites and campaigns designed to be remembered, not just seen.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary btn-large" href="#contact">Start a project</a>
+    <a class="btn btn-ghost" href="#work">See the work</a>
+  </div>
+  <div class="hero-meta">
+    <div><strong>120+</strong><span>Projects shipped</span></div>
+    <div><strong>14</strong><span>Design awards</span></div>
+    <div><strong>9 yrs</strong><span>Doing this</span></div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span><i>✦</i>Brand Identity</span><span><i>✦</i>Web Design</span><span><i>✦</i>Art Direction</span><span><i>✦</i>Motion</span><span><i>✦</i>Campaigns</span><span><i>✦</i>Packaging</span>
+    <span><i>✦</i>Brand Identity</span><span><i>✦</i>Web Design</span><span><i>✦</i>Art Direction</span><span><i>✦</i>Motion</span><span><i>✦</i>Campaigns</span><span><i>✦</i>Packaging</span>
+  </div>
+</div>
+
+<section id="services">
+  <div class="section-head">
+    <span class="kicker">What we do</span>
+    <h2>Full-stack creativity, <em>no hand-offs.</em></h2>
+    <p>One team from first sketch to final launch — strategy, design and build under one roof.</p>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <span class="num">01</span>
+      <h3>Brand Identity</h3>
+      <p>Logos, systems and guidelines with a point of view. Brands that sound like someone, not something.</p>
+      <ul><li>Logo &amp; visual systems</li><li>Tone of voice</li><li>Guidelines</li></ul>
+    </div>
+    <div class="card">
+      <span class="num">02</span>
+      <h3>Web Design &amp; Build</h3>
+      <p>Marketing sites and product pages that load fast, convert well and actually look like your brand.</p>
+      <ul><li>Marketing sites</li><li>E-commerce</li><li>Design systems</li></ul>
+    </div>
+    <div class="card">
+      <span class="num">03</span>
+      <h3>Campaigns &amp; Content</h3>
+      <p>Launch moments, social toolkits and content engines built to travel across every channel.</p>
+      <ul><li>Launch campaigns</li><li>Social kits</li><li>Copywriting</li></ul>
+    </div>
+    <div class="card">
+      <span class="num">04</span>
+      <h3>Motion &amp; 3D</h3>
+      <p>Scroll-stopping animation, product renders and interactive moments that give brands depth.</p>
+      <ul><li>Motion identity</li><li>3D &amp; renders</li><li>Interactive</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-head">
+    <span class="kicker">Selected work</span>
+    <h2>Recent projects we're <em>proud of.</em></h2>
+    <p>A snapshot of launches, rebrands and experiments from the last two years.</p>
+  </div>
+  <div class="grid-3">
+    <a class="work-card" href="#contact"><div class="work-art wa-1">KOVA</div><div class="work-body"><h3>Kova Coffee</h3><span>Brand identity · Packaging</span></div></a>
+    <a class="work-card" href="#contact"><div class="work-art wa-2">Lumen</div><div class="work-body"><h3>Lumen Fintech</h3><span>Web design · Build</span></div></a>
+    <a class="work-card" href="#contact"><div class="work-art wa-3">Fern</div><div class="work-body"><h3>Fern Botanics</h3><span>E-commerce · Art direction</span></div></a>
+    <a class="work-card" href="#contact"><div class="work-art wa-4">Atlas</div><div class="work-body"><h3>Atlas Records</h3><span>Campaign · Motion</span></div></a>
+    <a class="work-card" href="#contact"><div class="work-art wa-5">Bloom</div><div class="work-body"><h3>Bloom Skincare</h3><span>Rebrand · Packaging</span></div></a>
+    <a class="work-card" href="#contact"><div class="work-art wa-6">Drift</div><div class="work-body"><h3>Drift Airlines</h3><span>Brand identity · Web</span></div></a>
+  </div>
+</section>
+
+<section>
+  <div class="stats">
+    <div class="stat"><strong>120+</strong><span>Projects shipped</span></div>
+    <div class="stat"><strong>98%</strong><span>Clients who return</span></div>
+    <div class="stat"><strong>14</strong><span>Design awards</span></div>
+    <div class="stat"><strong>9</strong><span>Years running</span></div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="section-head">
+    <span class="kicker">How we work</span>
+    <h2>Simple process, <em>serious output.</em></h2>
+  </div>
+  <div class="steps">
+    <div class="step"><h3>Discover</h3><p>Workshops and research to find the sharp edge of your brand — what makes you different.</p></div>
+    <div class="step"><h3>Define</h3><p>Strategy, positioning and creative direction locked before a single pixel is placed.</p></div>
+    <div class="step"><h3>Design</h3><p>Iterative design sprints with you in the room. No big reveals, no surprises.</p></div>
+    <div class="step"><h3>Deliver</h3><p>Launch, handover and guidelines — plus support while the paint dries.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="quote">
+    <blockquote>"NOVA took our vague idea and turned it into a brand people <em>actually remember.</em> The launch tripled our signups."</blockquote>
+    <cite><strong>Maya Chen</strong> — Founder, Lumen Fintech</cite>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <span class="kicker">Got a project?</span>
+  <h2>Let's make something <em>worth talking about.</em></h2>
+  <p>Tell us where you're headed — we'll bring the ideas, the craft and an unreasonable attention to detail.</p>
+  <a class="btn btn-primary btn-large" href="mailto:hello@novastudio.example">hello@novastudio.example</a>
+</section>
+
+<footer>
+  <a class="logo" href="#top">NOVA<span>*</span></a>
+  <p>© 2026 NOVA Studio. All rights reserved.</p>
+  <div class="social">
+    <a href="#top">Instagram</a><a href="#top">Behance</a><a href="#top">LinkedIn</a><a href="#top">X</a>
+  </div>
+</footer>
+
+</body>
+</html>
